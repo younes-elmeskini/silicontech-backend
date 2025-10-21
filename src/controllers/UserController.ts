@@ -86,18 +86,19 @@ export default class UserController {
         res.status(401).json({ message: "Invalid credentials" });
         return;
       }
+      const isProduction = process.env.NODE_ENV === "production";
       res.cookie("token", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
-        maxAge: stayed ? 15 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
+        secure: isProduction,
+        sameSite: isProduction ? "strict" : "lax",
+        maxAge: 24 * 60 * 60 * 1000,
+        domain: isProduction ? ".elmeskini.site" : undefined,
+        path: "/",
       });
+
       res.status(200).json({
         message: "Login successful",
-        user: {
-          userId: user.id,
-          email: user.email,
-        },
+        isProduction: isProduction,
       });
     } catch (error) {
       console.error("Login error:", error);
