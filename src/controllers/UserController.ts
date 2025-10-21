@@ -214,4 +214,16 @@ export default class UserController {
     res.clearCookie("token");
     res.status(200).json({ message: "Logout successful" });
   }
+  static async checkAuth(req: Request, res: Response): Promise<void> {
+    try {
+      const token = req.cookies.token;
+      if (!token) {
+        res.status(401).json({ authenticated: false });
+        return;
+      }
+      res.status(200).json({ authenticated: true });
+    } catch (error) {
+      res.status(500).json({ authenticated: false });
+    }
+  }
 }

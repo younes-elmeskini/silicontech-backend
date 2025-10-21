@@ -14,5 +14,6 @@ router.post('/resetpassword', UserController.resetPassword);
 // GET 
 router.get('/users',authenticate, UserController.getUser);
 router.get('/me',authenticate, UserController.userData);
+router.get("/check-auth", UserController.checkAuth);
 
 export default router;
