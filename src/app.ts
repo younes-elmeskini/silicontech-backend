@@ -16,7 +16,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://silicontech.elmeskini.site/"],
+    origin: ["http://localhost:3000", "https://silicontech.elmeskini.site"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization", "Set-Cookie"],
